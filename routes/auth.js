@@ -2,7 +2,7 @@ const {
     login,
     userInfo,
     modifyInfo,
-} = require("../controllers/customer")
+} = require("../controllers/user")
 
 
 const router = require("express").Router()

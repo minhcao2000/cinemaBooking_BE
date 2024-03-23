@@ -1,22 +1,22 @@
-const Customer = require("../models/customer")
+const User = require("../models/user")
 
 
 // middleware functions
 
-// verify customer
-// login function returns customer info object
+// verify user
+// login function returns user info object
 module.exports.login = async (req, res, next) => {
     try {
         const { Username, Password } = req.body
-        const customer = await Customer.findOne({ Username })
-        if (!customer) res.json({ msg: 'Invalid Username!!', status: false })
-        if (Password !== customer.Password)
+        const user = await User.findOne({ Username })
+        if (!user) res.json({ msg: 'Invalid Username!!', status: false })
+        if (Password !== user.Password)
             res.json({
                 msg: 'Incorrect Password!!',
                 status: false
             })
 
-        res.status(200).json({ status: true, customer})
+        res.status(200).json({ status: true, user})
     } catch (err) {
         next(err)
     }
@@ -24,20 +24,20 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.userInfo = async (req, res, next) => {
     try {
-        // get customer Username from req.customer (see middleware/authen.js)
+        // get user Username from req.user (see middleware/authen.js)
         const { Username } = req.body
         if (!Username) res.json({
-            msg: "Can not get customer Username!",
+            msg: "Can not get user Username!",
             status: false
         })
-        const customer = await Customer.findOne({ Username })
-        if (!customer)
+        const user = await User.findOne({ Username })
+        if (!user)
             res.json({
                 msg: 'Invalid Username!!',
                 status: false
             })
 
-        const { Name, Birthday, Gender, Address, Phone, Email } = customer
+        const { Name, Birthday, Gender, Address, Phone, Email } = user
         res.status(200).json({
             data: {
                 Name,
@@ -55,30 +55,30 @@ module.exports.userInfo = async (req, res, next) => {
 
 module.exports.modifyInfo = async (req, res, next) => {
     try {
-        // get customer Username from req.customer
-        const { Username } = req.customer
-        if (!Username) res.json({ msg: "Can not get customer's Username!" })
+        // get user Username from req.user
+        const { Username } = req.user
+        if (!Username) res.json({ msg: "Can not get user's Username!" })
 
         const { Name, Birthday, Gender, Address, Phone, Email } = req.body
 
         if (!Username) res.json({
-            msg: "Can not get customer's Username!",
+            msg: "Can not get user's Username!",
             status: false
         })
 
         // { filter }, { update }, { set new to 'true' to update }
-        const customer = await Customer.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
             { Username },
             { Name, Birthday, Gender, Address, Phone, Email },
             { new: true }
         )
 
-        if (!customer) res.json({
+        if (!user) res.json({
             msg: 'Invalid Username!',
             status: false
         })
 
-        res.status(200).json({ customer, status: true })
+        res.status(200).json({ user, status: true })
 
     } catch (err) {
         next(err)

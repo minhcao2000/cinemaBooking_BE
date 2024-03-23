@@ -1,9 +1,8 @@
 const { create } = require('domain')
 const mongoose = require('mongoose')
 
-// create customer schema
-const customerSchema = new mongoose.Schema({
-    Username: String, 
+const userSchema = new mongoose.Schema({
+    Username: String,
     Password: String,
     Name: String,
     Birthday: Date,
@@ -13,6 +12,8 @@ const customerSchema = new mongoose.Schema({
     Email: String,
     Created_time: Date,
     Total_point: Number,
+    Certificate: String,
+    isAdmin: Boolean
 })
 
-module.exports = mongoose.model("customer", customerSchema, "customer")
+module.exports = mongoose.model("user", userSchema, "user")

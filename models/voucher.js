@@ -1,9 +1,8 @@
 const { create } = require('domain')
 const mongoose = require('mongoose')
 
-// create customer schema
+
 const voucherSchema = new mongoose.Schema({
-    VoucherID: String,
     S_time: Date,
     E_time: Date,
     Gender: String,
