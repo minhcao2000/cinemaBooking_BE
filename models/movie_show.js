@@ -5,12 +5,15 @@ const ObjectId = mongoose.Schema.ObjectId;
 const movieShowSchema = new mongoose.Schema({
     Date: Date,
     Time: String,
-    Admin_ID: ObjectId,
-    movie: {
+    Admin_ID: {
+        type: ObjectId,
+        ref: 'user',
+    },
+    Movie: {
         type: ObjectId,
         ref: 'movie'
     },
-    room: {
+    Room: {
         type: ObjectId,
         ref: 'room' 
     }

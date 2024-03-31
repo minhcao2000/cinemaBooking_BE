@@ -7,7 +7,7 @@ const movieSchema = new mongoose.Schema({
     Director: String,
     Release_date: Date,
     Description: String,
-    Age_limit: Number,
+    Age_limit: String,
     Rating: Number,
     Time_limit: String,
     Images: [

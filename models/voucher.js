@@ -1,7 +1,6 @@
 const { create } = require('domain')
 const mongoose = require('mongoose')
 
-
 const voucherSchema = new mongoose.Schema({
     S_time: Date,
     E_time: Date,
