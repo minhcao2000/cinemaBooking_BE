@@ -1,3 +1,4 @@
+const { json } = require("express")
 const Movie = require("../models/movie")
 const MovieShow = require("../models/movie_show")
 
@@ -53,19 +54,21 @@ module.exports.searchMovieByName = async (req, res, next) => {
     }
 }
 
-module.exports.currentShows = async (req, res, next) => {
+module.exports.currentMovies = async (req, res, next) => {
     try {
-        const shows = await MovieShow.find({}).distinct("Movie")
+        const movieIds = await MovieShow.find({}).distinct("Movie")
         let movies = []
-        
-        for (i = 0; i < shows.length; i++) {
-            let movie = await Movie.findById(shows[i])
+        let movie = {}
+
+        for (i = 0; i < movieIds.length; i++) {
+            movie = await Movie.findById(movieIds[i])
+            let shows = await MovieShow.find({Movie: movieIds[i]}, 'Date Time Room_number')
             movies.push(movie)
         }
 
         res.json({
             status: true,
-            shows,
+            movieIds,
             movies,
         })
 
@@ -73,6 +76,43 @@ module.exports.currentShows = async (req, res, next) => {
         next(err)
     }
 }
+
+module.exports.showsOfMovie = async (req, res, next) => {
+    try {
+        const {movieId} = req.body
+        const shows = await MovieShow.find({Movie: movieId}, 'Date Time Room_number')
+
+        if (shows.length > 0) {
+            res.json({
+                status: true,
+                shows
+            })
+        } else {
+            res.json({
+                status: false,
+                msg: 'The movie is not currently on showtime'
+            })
+        }
+    } catch(err) {
+        next(err)
+    }
+}
+
+module.exports.removeMovie = async (req, res, next) => {
+    try {
+        const {_id} = req.body
+        Movie.findOneAndDelete({_id})
+
+        res.json({
+            status: true,
+            msg: "Movie removed successfully"
+        })
+        
+    } catch(err) {
+        next(err)
+    }
+}
+
 
 
 
