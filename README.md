@@ -11,6 +11,7 @@ To get started, clone this repository to your local machine using the following 
 After cloning, navigate into the `cinemaBooking_BE` directory and install the required Node.js modules using npm:
 
 ``cd cinemaBooking_BE``
+
 ``npm install``
 
 ## Usage
