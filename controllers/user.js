@@ -22,6 +22,47 @@ module.exports.login = async (req, res, next) => {
     }
 }
 
+module.exports.signup = async(req, res, next) => {
+    try {
+        const { Name, Username, Password, Phone, Email, Address, Birthday, Gender } = req.body
+        const userExisted = await User.findOne({Username})
+        const emailExisted = await User.findOne({Email})
+        if (userExisted) {
+            return res.json({
+                msg: 'Username already existed',
+                status: false
+            })
+        }
+
+        if (emailExisted) {
+            return res.json({
+                msg: 'Email already existed',
+                status: false
+            })
+        }
+
+        const user = await User.create({
+            Name,
+            Username,
+            Password,
+            Phone,
+            Email,
+            Address,
+            Birthday,
+            Gender,
+            isAdmin: false,
+            Total_point: 0,
+            Created_time: new Date(),
+        })
+
+        return res.json({
+            status: true, user
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
 module.exports.userInfo = async (req, res, next) => {
     try {
         // get user Username from req.user (see middleware/authen.js)
