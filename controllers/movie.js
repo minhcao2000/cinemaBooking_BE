@@ -1,10 +1,11 @@
 const Movie = require("../models/movie")
+const MovieShow = require("../models/movie_show")
 
 module.exports.getAllMovies = async (req, res, next) => {
     try {
         const movies = await Movie.find({})
 
-        res.status(200).json({movies})
+        res.status(200).json({movies, status: true})
     } catch (err) {
         next(err)
     }
@@ -17,7 +18,8 @@ module.exports.movieDetails = async (req, res, next) => {
 
         if (movie) {
             res.status(200).json({
-                movie
+                movie,
+                status: true
             })
         } else {
             res.json({
@@ -33,7 +35,6 @@ module.exports.movieDetails = async (req, res, next) => {
 module.exports.searchMovieByName = async (req, res, next) => {
     try {
         const { Name } = req.body
-
         const movies = await Movie.find({ "Name": {"$regex": Name, "$options": "i"} })
 
         if (!movies) {
@@ -43,6 +44,7 @@ module.exports.searchMovieByName = async (req, res, next) => {
             })
         } else {
             res.status(200).json({
+                status: true,
                 movies
             })
         }
@@ -50,5 +52,27 @@ module.exports.searchMovieByName = async (req, res, next) => {
         next(err)
     }
 }
+
+module.exports.currentShows = async (req, res, next) => {
+    try {
+        const shows = await MovieShow.find({}).distinct("Movie")
+        let movies = []
+        
+        for (i = 0; i < shows.length; i++) {
+            let movie = await Movie.findById(shows[i])
+            movies.push(movie)
+        }
+
+        res.json({
+            status: true,
+            shows,
+            movies,
+        })
+
+    } catch(err) {
+        next(err)
+    }
+}
+
 
 

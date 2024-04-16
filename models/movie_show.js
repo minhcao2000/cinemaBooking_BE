@@ -19,4 +19,4 @@ const movieShowSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("movieShow", customerSchema, "movieShow")
+module.exports = mongoose.model("movie_show", movieShowSchema, "movie_show")
