@@ -11,4 +11,4 @@ const voucherSchema = new mongoose.Schema({
     Discount_percent: Number
 })
 
-module.exports = mongoose.model("voucher", customerSchema, "voucher")
+module.exports = mongoose.model("voucher", voucherSchema, "voucher")

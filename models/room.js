@@ -6,4 +6,4 @@ const roomSchema = new mongoose.Schema({
     State: String,
 })
 
-module.exports = mongoose.model("room", customerSchema, "room")
+module.exports = mongoose.model("room", roomSchema, "room")

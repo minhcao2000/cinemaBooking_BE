@@ -22,4 +22,4 @@ const movieSchema = new mongoose.Schema({
     Language: [String]
 })
 
-module.exports = mongoose.model("movie", customerSchema, "movie")
+module.exports = mongoose.model("movie", movieSchema, "movie")

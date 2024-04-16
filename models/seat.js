@@ -13,4 +13,4 @@ const seatSchema = new mongoose.Schema({
     State: String
 })
 
-module.exports = mongoose.model("seat", customerSchema, "seat")
+module.exports = mongoose.model("seat", seatSchema, "seat")

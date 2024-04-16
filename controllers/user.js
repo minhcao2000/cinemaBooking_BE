@@ -1,10 +1,7 @@
 const User = require("../models/user")
-
-
 // middleware functions
 
-// verify user
-// login function returns user info object
+// http://localhost:8000/auth/login/
 module.exports.login = async (req, res, next) => {
     try {
         const { Username, Password } = req.body
@@ -22,6 +19,7 @@ module.exports.login = async (req, res, next) => {
     }
 }
 
+// http://localhost:8000/auth/signup/
 module.exports.signup = async(req, res, next) => {
     try {
         const { Name, Username, Password, Phone, Email, Address, Birthday, Gender } = req.body
@@ -63,6 +61,7 @@ module.exports.signup = async(req, res, next) => {
     }
 }
 
+// http://localhost:8000/auth/userInfo/
 module.exports.userInfo = async (req, res, next) => {
     try {
         // get user Username from req.user (see middleware/authen.js)
