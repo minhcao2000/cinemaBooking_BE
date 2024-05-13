@@ -1,6 +1,7 @@
 const { json } = require("express")
 const Movie = require("../models/movie")
 const MovieShow = require("../models/movie_show")
+const movie = require("../models/movie")
 
 module.exports.getAllMovies = async (req, res, next) => {
     try {
@@ -72,6 +73,28 @@ module.exports.currentMovies = async (req, res, next) => {
             movies,
         })
 
+    } catch(err) {
+        next(err)
+    }
+}
+
+module.exports.searchMovie = async (req, res, next) => {
+    try {
+        const {Rating, Language, Name, Genre, Format, Cast} = req.body;
+        const query = [];
+
+        if (Rating) query.push({Rating: {$gt: Rating}});
+        if (Language) query.push({Language: Language});
+        if (Genre) query.push({Genre: Genre});
+        if (Format) query.push({Format: Format});
+        if (Cast) query.push({Cast: Cast});
+
+        const movies = await Movie.find({$and: query})
+
+        res.json({
+            status: true,
+            movies
+        })
     } catch(err) {
         next(err)
     }

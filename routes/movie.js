@@ -5,6 +5,7 @@ const {
     currentMovies,
     showsOfMovie,
     removeMovie,
+    searchMovie
 } = require('../controllers/movie')
 const {
     getAllVouchers
@@ -18,6 +19,7 @@ router.get('/searchMovieByName', searchMovieByName)
 router.get('/currentMovies', currentMovies)
 router.get('/showsOfMovie', showsOfMovie)
 router.delete('/removeMovie', removeMovie)
+router.post('/searchMovie', searchMovie)
 
 router.get('/getAllVouchers', getAllVouchers)
 
