@@ -101,7 +101,7 @@ module.exports.showsOfMovie = async (req, res, next) => {
 module.exports.removeMovie = async (req, res, next) => {
     try {
         const {_id} = req.body
-        Movie.findOneAndDelete({_id})
+        await Movie.deleteOne({ _id: _id})
 
         res.json({
             status: true,
