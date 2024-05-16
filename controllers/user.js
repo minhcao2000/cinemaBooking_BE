@@ -61,16 +61,16 @@ module.exports.signup = async(req, res, next) => {
     }
 }
 
-// http://localhost:8000/auth/userInfo/
+// http://localhost:8000/auth/userInfo/:username
 module.exports.userInfo = async (req, res, next) => {
     try {
         // get user Username from req.user (see middleware/authen.js)
-        const { Username } = req.body
-        if (!Username) res.json({
-            msg: "Can not get user Username!",
+        const { username } = req.params
+        if (!username) res.json({
+            msg: "Can not get user username!",
             status: false
         })
-        const user = await User.findOne({ Username })
+        const user = await User.findOne({ Username: username })
         if (!user)
             res.json({
                 msg: 'Invalid Username!!',
@@ -96,19 +96,17 @@ module.exports.userInfo = async (req, res, next) => {
 module.exports.modifyInfo = async (req, res, next) => {
     try {
         // get user Username from req.user
-        const { Username } = req.user
-        if (!Username) res.json({ msg: "Can not get user's Username!" })
-
-        const { Name, Birthday, Gender, Address, Phone, Email } = req.body
-
-        if (!Username) res.json({
-            msg: "Can not get user's Username!",
+        const { username } = req.params
+        if (!username) res.json({
+            msg: "Can not get user's username!",
             status: false
         })
 
+        const { Name, Birthday, Gender, Address, Phone, Email } = req.body
+
         // { filter }, { update }, { set new to 'true' to update }
         const user = await User.findOneAndUpdate(
-            { Username },
+            { Username: username },
             { Name, Birthday, Gender, Address, Phone, Email },
             { new: true }
         )

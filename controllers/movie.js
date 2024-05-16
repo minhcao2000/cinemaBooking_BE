@@ -102,7 +102,7 @@ module.exports.searchMovie = async (req, res, next) => {
 
 module.exports.showsOfMovie = async (req, res, next) => {
     try {
-        const {movieId} = req.body
+        const {movieId} = req.params
         const shows = await MovieShow.find({Movie: movieId}, 'Date Time Room_number')
 
         if (shows.length > 0) {
@@ -135,7 +135,3 @@ module.exports.removeMovie = async (req, res, next) => {
         next(err)
     }
 }
-
-
-
-

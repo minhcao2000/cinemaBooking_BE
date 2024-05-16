@@ -10,8 +10,8 @@ const router = require("express").Router()
 
 router.post('/login', login)
 router.post('/signup', signup)
-router.get('/userInfo', userInfo)
-router.patch('/modifyInfo', modifyInfo)
+router.get('/userInfo/:username', userInfo)
+router.patch('/modifyInfo/:username', modifyInfo)
 
 
 // error handler
