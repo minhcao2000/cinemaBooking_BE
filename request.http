@@ -1,0 +1,69 @@
+POST http://localhost:8000/movie/showsOfMovie
+Content-Type: application/json
+
+{
+    "movieId": "66093ea52e98bf6dda3f6b47"
+}
+
+###
+GET http://localhost:8004/movie/currentMovies
+
+###
+POST http://localhost:8004/movie/showsOfMovie
+Content-Type: application/json
+
+{
+    "movieId": "66093ea52e98bf6dda3f6b49"
+}
+
+###
+POST http://localhost:8000/seat/addSeat
+Content-Type: application/json
+
+{
+    "Row_index": "G",
+    "Col_index": 2,
+    "Room_number": 3,
+    "State" : "False",
+    "Show_ref": "661e0bdac9f1fffc989c7f66"
+}
+
+###
+POST http://localhost:8004/seat/allSeats
+Content-Type: application/json
+
+{
+   
+    "Show_ref": "661e0bdac9f1fffc989c7f66"
+}
+
+###
+POST http://localhost:8004/ticket/addTicket
+Content-Type: application/json
+
+{
+   
+    "User_ID": "66478bd8444fde42a86317b3",
+    "Seat_IDs": ["66478163c02bd1b5cfad3483", "66478176c02bd1b5cfad3485"]
+}
+
+###
+GET http://192.168.1.82:8004/ticket/allTickets
+
+###
+POST http://172.26.176.1:8004/auth/login
+Content-Type: application/json
+
+{
+    "Username": "MinhCao",
+    "Password": "MinhCao"
+}
+
+###
+POST http://localhost:8004/auth/userInfo
+
+Content-Type: application/json
+
+{
+    "Username": "MinhCao"
+}

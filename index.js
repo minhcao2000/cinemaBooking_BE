@@ -7,6 +7,8 @@ require("dotenv").config()
 const authRoutes = require("./routes/auth")
 const movieRoutes = require("./routes/movie")
 const orderRoutes = require('./routes/order')
+const seatRoutes = require("./routes/seat")
+const ticketRoutes = require("./routes/ticket")
 
 // connect database
 db.connect()
@@ -18,6 +20,8 @@ app.use(cors())
 app.use("/auth", authRoutes)
 app.use("/movie", movieRoutes)
 app.use("/order", orderRoutes)
+app.use("/ticket", ticketRoutes)
+app.use("/seat", seatRoutes)
 
 //
 app.listen(process.env.PORT, () => {

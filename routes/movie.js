@@ -17,7 +17,7 @@ router.get('/allMovies', getAllMovies)
 router.get('/movieDetails', movieDetails)
 router.get('/searchMovieByName', searchMovieByName)
 router.get('/currentMovies', currentMovies)
-router.get('/showsOfMovie', showsOfMovie)
+router.post('/showsOfMovie', showsOfMovie)
 router.delete('/removeMovie', removeMovie)
 router.post('/searchMovie', searchMovie)
 

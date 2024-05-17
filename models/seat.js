@@ -6,9 +6,9 @@ const seatSchema = new mongoose.Schema({
     Row_index: String,
     Col_index: Number,
     Room_number: Number,
-    Room_ref:  {
+    Show_ref: {
         type: ObjectId,
-        ref: 'room'
+        ref: 'movie_show'
     },
     State: String
 })
